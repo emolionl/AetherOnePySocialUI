@@ -59,7 +59,39 @@
                                     Created At
                                 </dt>
                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                    {new Date(keyDetails.created_at).toLocaleString()}
+                                    {new Date(keyDetails.created).toLocaleString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        timeZone: 'UTC'  // Since the timestamp is in UTC (+00:00)
+                                    })}
+                                </dd>
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Used
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {keyDetails.used ? 'Used' : 'Free'}
+                                </dd>
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Key
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {keyDetails.key}
+                                </dd>
+                                <dt class="text-sm font-medium text-gray-500">
+                                    Used At
+                                </dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {new Date(keyDetails.used_at).toLocaleString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        timeZone: 'UTC'  // Since the timestamp is in UTC (+00:00)
+                                    })}
                                 </dd>
                             </div>
                             <!-- Add more key details as needed -->

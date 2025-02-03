@@ -7,7 +7,7 @@ const API_URL = 'https://aetheronepysocial.emolio.nl';
 
 export async function login(email: string, password: string) {
     try {
-        const response = await fetch(`${API_URL}/api/auth/token`, {
+        const response = await fetch(`${API_URL}/api/auth/login/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -47,7 +47,7 @@ export async function login(email: string, password: string) {
 
 export async function register(username: string, email: string, password: string) {
     try {
-        const response = await fetch(`${API_URL}/api/auth/register`, {
+        const response = await fetch(`${API_URL}/api/auth/register/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ export async function register(username: string, email: string, password: string
 }
 
 export async function getKeys(authToken: string) {
-    const response = await fetch(`${API_URL}/api/session-keys/my-session-keys`, {
+    const response = await fetch(`${API_URL}/api/keys/`, {
         headers: {
             'Authorization': `Bearer ${authToken}`
         }
@@ -99,7 +99,21 @@ export async function getKeys(authToken: string) {
 }
 
 export async function getKeyDetails(authToken: string, keyId: string) {
-    const response = await fetch(`${API_URL}/api/session-keys/my-session-keys/${keyId}`, {
+    const response = await fetch(`${API_URL}/api/keys/${keyId}`, {
+        headers: {
+            'Authorization': `Bearer ${authToken}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch key details');
+    }
+
+    return await response.json();
+}
+
+export async function getConnectedKeys(authToken: string, keyId: string) {
+    const response = await fetch(`${API_URL}/api/analysis/key/${keyId}`, {
         headers: {
             'Authorization': `Bearer ${authToken}`
         }
